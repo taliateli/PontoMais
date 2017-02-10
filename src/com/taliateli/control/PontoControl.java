@@ -124,7 +124,7 @@ public class PontoControl implements Initializable {
 			logs.add("Ponto registrado com sucesso. Colaborador: " + col.getNome() + " - "
 					+ Util.getDataFormatada(pEntrada.getDataHora(), "dd/MM/yyyy HH:mm:ss"));
 			lvRegistro.setItems(FXCollections.observableArrayList(logs));
-			MensagensDialog.getAlertInformation("Informa��o do Sistema", "Ponto registrado com sucesso!");
+			MensagensDialog.getAlertInformation("Informação do Sistema", "Ponto registrado com sucesso!");
 		} catch (Exception e) {
 			MensagensDialog.getAlertError(e.getMessage());
 		}
@@ -146,7 +146,7 @@ public class PontoControl implements Initializable {
 			logs.add("Ponto registrado com sucesso. Colaborador: " + col.getNome() + " - "
 					+ Util.getDataFormatada(pEntradaAlmoco.getDataHora(), "dd/MM/yyyy HH:mm:ss"));
 			lvRegistro.setItems(FXCollections.observableArrayList(logs));
-			MensagensDialog.getAlertInformation("Informa��o do Sistema", "Ponto registrado com sucesso!");
+			MensagensDialog.getAlertInformation("Informação do Sistema", "Ponto registrado com sucesso!");
 		} catch (Exception e) {
 			MensagensDialog.getAlertError(e.getMessage());
 		}
@@ -168,7 +168,7 @@ public class PontoControl implements Initializable {
 			logs.add("Ponto registrado com sucesso. Colaborador: " + col.getNome() + " - "
 					+ Util.getDataFormatada(pSaidaAlmoco.getDataHora(), "dd/MM/yyyy HH:mm:ss"));
 			lvRegistro.setItems(FXCollections.observableArrayList(logs));
-			MensagensDialog.getAlertInformation("Informa��o do Sistema", "Ponto registrado com sucesso!");
+			MensagensDialog.getAlertInformation("Informação do Sistema", "Ponto registrado com sucesso!");
 		} catch (Exception e) {
 			MensagensDialog.getAlertError(e.getMessage());
 		}
@@ -190,7 +190,7 @@ public class PontoControl implements Initializable {
 			logs.add("Ponto registrado com sucesso. Colaborador: " + col.getNome() + " - "
 					+ Util.getDataFormatada(pSaida.getDataHora(), "dd/MM/yyyy HH:mm:ss"));
 			lvRegistro.setItems(FXCollections.observableArrayList(logs));
-			MensagensDialog.getAlertInformation("Informa��o do Sistema", "Ponto registrado com sucesso!");
+			MensagensDialog.getAlertInformation("Informação do Sistema", "Ponto registrado com sucesso!");
 		} catch (Exception e) {
 			MensagensDialog.getAlertError(e.getMessage());
 		}
@@ -217,7 +217,7 @@ public class PontoControl implements Initializable {
 
 			grid.add(new Label("Nome: "), 0, 0);
 			grid.add(txNome, 1, 0);
-			grid.add(new Label("Fun��o: "), 0, 1);
+			grid.add(new Label("Função: "), 0, 1);
 			grid.add(txFuncao, 1, 1);
 
 			dialog.getDialogPane().setContent(grid);
@@ -231,7 +231,7 @@ public class PontoControl implements Initializable {
 				col.setFuncao(txFuncao.getText().toUpperCase());
 				col.setDtInclusao(new Date());
 				cd.salvar(col);
-				MensagensDialog.getAlertInformation("Informa��o do Sistema", "Colaborador cadastrado com sucesso!");
+				MensagensDialog.getAlertInformation("Informação do Sistema", "Colaborador cadastrado com sucesso!");
 				preencherTbView();
 				carregarCboColaboradores();
 			}
@@ -244,11 +244,11 @@ public class PontoControl implements Initializable {
 	public void btExcluirColaborador() {
 		try {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Confirma��o de Exclus�o");
-			alert.setHeaderText("Confirma a exclus�o do colaborador");
+			alert.setTitle("Confirmação de Exclusão");
+			alert.setHeaderText("Confirma a exclusão do colaborador");
 
 			ButtonType btSim = new ButtonType("Sim");
-			ButtonType btNao = new ButtonType("N�o");
+			ButtonType btNao = new ButtonType("Não");
 			alert.getButtonTypes().setAll(btSim, btNao);
 			Optional<ButtonType> result = alert.showAndWait();
 			ColaboradorDao cd = new ColaboradorDao();
