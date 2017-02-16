@@ -2,7 +2,7 @@ package com.taliateli.util;
 
 import java.util.Map;
 
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-02-16T00:28:25 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="folha_ponto" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a1f690a3-5977-4467-85f8-6b0bcd5b7210">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BD pontoMais"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="171"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="822"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="501"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="485"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="dtInicio" class="java.lang.String"/>
+	<parameter name="dtFim" class="java.lang.String"/>
+	<parameter name="Logo" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT  EXTRACT(DAY
+FROM e.dataHora) AS Dia, CAST(e.dataHora AS TIME) AS Entrada, 
+CAST(sa.dataHora AS TIME) AS SaidaAlmoco, CAST(ea.dataHora AS TIME) AS EntradaAlmoco, 
+CAST(s.dataHora AS TIME) AS Saida,
+c.nome, c.funcao,
+TIMESTAMPDIFF(MINUTE,e.dataHora,s.dataHora)/60 AS horas_trabalhadas
+FROM colaborador c, entrada e, entrada_almoco ea, saida_almoco sa, saida s 
+where c.id =1 AND (EXTRACT(DAY FROM sa.dataHora))=EXTRACT(DAY FROM e.dataHora) 
+AND EXTRACT(DAY FROM ea.dataHora)=EXTRACT(DAY FROM s.dataHora) AND 
+(EXTRACT(DAY FROM ea.dataHora))=EXTRACT(DAY FROM e.dataHora)]]>
+	</queryString>
+	<field name="Dia" class="java.lang.Long"/>
+	<field name="Entrada" class="java.sql.Time"/>
+	<field name="SaidaAlmoco" class="java.sql.Time"/>
+	<field name="EntradaAlmoco" class="java.sql.Time"/>
+	<field name="Saida" class="java.sql.Time"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="funcao" class="java.lang.String"/>
+	<field name="horas_trabalhadas" class="java.math.BigDecimal"/>
+	<variable name="total_horas" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{horas_trabalhadas}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="74" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="2" width="263" height="33" uuid="6f9c1004-6140-4588-9c4f-d75824835765"/>
+				<textElement verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Arriel Automação]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="36" width="340" height="15" uuid="d5520930-9481-4283-8a07-e18467569e19"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="53" width="341" height="14" uuid="c423d62f-3d4e-4761-a29f-aabcee7f800d"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{funcao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="52" width="69" height="15" uuid="94d63f63-d429-401b-b392-956bb5360ce9"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Função:]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="68" width="555" height="1" uuid="0bded70a-fbac-42b6-9589-d9485ab2f86c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="36" width="70" height="15" uuid="323dd6e0-747a-4b81-ad0a-bcf72c4f7d58">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Funcionário:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="450" y="0" width="100" height="66" uuid="8242ac68-6f2a-4c44-9790-ce6413da60ed"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="0" y="2" width="58" height="15" uuid="613a4b34-e9c1-4e93-8d17-3ab5abb33e1e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[Dia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="58" y="2" width="92" height="15" uuid="3e1650a0-6026-410c-93b0-0d1bf65a63a6"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[Entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="150" y="2" width="92" height="15" uuid="6e28f9f3-2789-4e82-b7e2-3d113b989038"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[SaidaAlmoco]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="242" y="2" width="92" height="15" uuid="cb196ba6-ece2-436e-94d9-802e617baecd"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[EntradaAlmoco]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="334" y="2" width="92" height="15" uuid="4f28f6cd-9553-4d6f-b779-813b9772958f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[Saida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="426" y="2" width="126" height="15" uuid="408bbc30-aa8b-4280-b42d-27160a41a365"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[Horas_Trabalhadas
+]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="17" width="555" height="1" uuid="f36857c1-4cc4-448f-aeb6-efc053d357f3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="58" height="15" uuid="6d56dd56-d591-4d16-b971-87c1a0cc3ee6"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Dia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm:ss" isBlankWhenNull="true">
+				<reportElement style="Detail" x="58" y="0" width="92" height="15" uuid="b5e46fd8-fb32-4360-944a-7f934479af3d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Entrada}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm:ss" isBlankWhenNull="true">
+				<reportElement style="Detail" x="150" y="0" width="92" height="15" uuid="91c67908-6734-4688-863b-f814d6774dc5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SaidaAlmoco}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm:ss" isBlankWhenNull="true">
+				<reportElement style="Detail" x="242" y="0" width="92" height="15" uuid="6fd899ce-1e37-4a33-958a-e8545dc41408"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EntradaAlmoco}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm:ss" isBlankWhenNull="true">
+				<reportElement style="Detail" x="334" y="0" width="92" height="15" uuid="430de387-6a96-4147-94cf-06e1f726f6d5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Saida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="426" y="0" width="126" height="15" uuid="2f46cc0b-68e5-4bc2-9bd9-8fc08c3faa1d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{horas_trabalhadas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="17">
+			<textField>
+				<reportElement x="480" y="0" width="70" height="15" uuid="7530f3b5-c6f9-42a4-80d6-532916a243b3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_horas}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="390" y="0" width="89" height="15" uuid="7d5a484e-0956-484a-bba6-1dceaf1f39d6"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total horas:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="deb23d85-47bb-4de6-978e-113ff117188c"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="c6ce76ba-6e11-41e2-9415-72dc2eff001b"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="5a79d2a0-bcde-4ad5-adf0-c4eb2066f6dd"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

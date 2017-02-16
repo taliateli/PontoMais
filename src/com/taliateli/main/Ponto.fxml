@@ -155,7 +155,7 @@
                       </FlowPane.margin>
                     </Label>
                     <TextField fx:id="txDtFinal" prefHeight="33.0" prefWidth="135.0" promptText="dd/MM/aaaa" FlowPane.margin="$x3" />
-                    <Button font="$x2" mnemonicParsing="false" prefHeight="33.0" prefWidth="106.0" style="-fx-background-color: #00A859;&#10;-fx-cursor: hand; " text="Imprimir" textFill="WHITE" FlowPane.margin="$x3">
+                    <Button font="$x2" mnemonicParsing="false" onAction="#imprimirRelatorio" prefHeight="33.0" prefWidth="106.0" style="-fx-background-color: #00A859;&#10;-fx-cursor: hand; " text="Imprimir" textFill="WHITE" FlowPane.margin="$x3">
                       <effect>
                         <Lighting diffuseConstant="1.4126984126984126" specularConstant="0.6968253968253968" specularExponent="14.285714285714286" surfaceScale="2.2142857142857144">
                           <bumpInput>

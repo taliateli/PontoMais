@@ -10,5 +10,13 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JasperReport6.3.1"/>
 	<classpathentry kind="lib" path="C:/Users/Ramon/Downloads/mysql-connector-java-5.1.40.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Ramon/Downloads/jasperreports-6.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ramon/Desktop/jars projeto PontoMais/commons-beanutils-1.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ramon/Desktop/jars projeto PontoMais/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ramon/Desktop/jars projeto PontoMais/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ramon/Desktop/jars projeto PontoMais/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ramon/Desktop/jars projeto PontoMais/itext-2.1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ramon/Desktop/jars projeto PontoMais/jaxen-1.1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ramon/Desktop/jars projeto PontoMais/xalan-2.7.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ramon/Desktop/jars projeto PontoMais/commons-digester-2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

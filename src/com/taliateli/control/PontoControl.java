@@ -1,17 +1,24 @@
 package com.taliateli.control;
 
+import java.io.File;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.taliateli.dao.ColaboradorDao;
+import com.taliateli.dao.Conexao;
 import com.taliateli.dao.PontoDao;
 import com.taliateli.model.Colaborador;
 import com.taliateli.model.PontoEntrada;
 import com.taliateli.model.PontoEntradaAlmoco;
+import com.taliateli.util.GeradorDeRelatorios;
 import com.taliateli.util.MensagensDialog;
 import com.taliateli.util.Util;
 
@@ -35,6 +42,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
+import net.sf.jasperreports.engine.JRException;
 
 public class PontoControl implements Initializable {
 
@@ -270,6 +278,31 @@ public class PontoControl implements Initializable {
 			}
 		} catch (Exception e) {
 			MensagensDialog.getAlertError(e.getMessage());
+		}
+	}
+
+	@FXML
+	public void imprimirRelatorio() {
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		String path = new File("").getAbsolutePath();
+
+		// parametros.put("dtInicial", txDtInicial);
+		// parametros.put("dtFinal", txDtFinal);
+		parametros.put("Logo", path + "/Imagens/Logo.png");
+
+		try {
+			GeradorDeRelatorios.gerar(Conexao.getConexao(), parametros, path + "/RelatorioJasper/folha_ponto.jasper");
+		} catch (JRException e) {
+			MensagensDialog.getAlertError(e.getMessage());
+		}
+
+	}
+
+	public static Date formataData(String data, String formato) {
+		try {
+			return new SimpleDateFormat(formato).parse(data);
+		} catch (ParseException ex) {
+			return null;
 		}
 	}
 
