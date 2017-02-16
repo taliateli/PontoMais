@@ -5,6 +5,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -285,9 +286,23 @@ public class PontoControl implements Initializable {
 	public void imprimirRelatorio() {
 		Map<String, Object> parametros = new HashMap<String, Object>();
 		String path = new File("").getAbsolutePath();
+		Date dtIni = formataData(txDtInicial.getText(), "dd/MM/yyyy");
+		Date dtFim = formataData(txDtFinal.getText(), "dd/MM/yyyy");
 
-		// parametros.put("dtInicial", txDtInicial);
-		// parametros.put("dtFinal", txDtFinal);
+		Calendar calIni = Calendar.getInstance();
+		calIni.setTime(dtIni);
+		calIni.set(Calendar.HOUR_OF_DAY, 0);
+		calIni.set(Calendar.MINUTE, 0);
+		calIni.set(Calendar.SECOND, 0);
+
+		Calendar calFim = Calendar.getInstance();
+		calFim.setTime(dtFim);
+		calFim.set(Calendar.HOUR_OF_DAY, 23);
+		calFim.set(Calendar.MINUTE, 59);
+		calFim.set(Calendar.SECOND, 59);
+
+		parametros.put("dtInicio", getDataFormatada(calIni.getTime(), "yyyy/MM/dd HH:mm"));
+		parametros.put("dtFim", getDataFormatada(calFim.getTime(), "yyyy/MM/dd HH:mm"));
 		parametros.put("Logo", path + "/Imagens/Logo.png");
 
 		try {
@@ -298,12 +313,21 @@ public class PontoControl implements Initializable {
 
 	}
 
-	public static Date formataData(String data, String formato) {
+	private static Date formataData(String data, String formato) {
 		try {
 			return new SimpleDateFormat(formato).parse(data);
 		} catch (ParseException ex) {
 			return null;
 		}
+	}
+
+	private static String getDataFormatada(Date data, String formato) {
+		SimpleDateFormat sdf = new SimpleDateFormat(formato);
+		if (data != null) {
+			return sdf.format(data);
+		}
+		return "";
+
 	}
 
 	public class ColaboradorModel {

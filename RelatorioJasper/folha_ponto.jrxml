@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-02-16T00:28:25 -->
+<!-- 2017-02-16T10:23:46 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="folha_ponto" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a1f690a3-5977-4467-85f8-6b0bcd5b7210">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
@@ -28,7 +28,7 @@ TIMESTAMPDIFF(MINUTE,e.dataHora,s.dataHora)/60 AS horas_trabalhadas
 FROM colaborador c, entrada e, entrada_almoco ea, saida_almoco sa, saida s 
 where c.id =1 AND (EXTRACT(DAY FROM sa.dataHora))=EXTRACT(DAY FROM e.dataHora) 
 AND EXTRACT(DAY FROM ea.dataHora)=EXTRACT(DAY FROM s.dataHora) AND 
-(EXTRACT(DAY FROM ea.dataHora))=EXTRACT(DAY FROM e.dataHora)]]>
+(EXTRACT(DAY FROM ea.dataHora))=EXTRACT(DAY FROM e.dataHora) and e.dataHora between $P{dtInicio} and $P{dtFim}]]>
 	</queryString>
 	<field name="Dia" class="java.lang.Long"/>
 	<field name="Entrada" class="java.sql.Time"/>
