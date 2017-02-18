@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-02-16T10:23:46 -->
+<!-- 2017-02-18T00:32:41 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="folha_ponto" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a1f690a3-5977-4467-85f8-6b0bcd5b7210">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
@@ -24,7 +24,7 @@ FROM e.dataHora) AS Dia, CAST(e.dataHora AS TIME) AS Entrada,
 CAST(sa.dataHora AS TIME) AS SaidaAlmoco, CAST(ea.dataHora AS TIME) AS EntradaAlmoco, 
 CAST(s.dataHora AS TIME) AS Saida,
 c.nome, c.funcao,
-TIMESTAMPDIFF(MINUTE,e.dataHora,s.dataHora)/60 AS horas_trabalhadas
+ROUND((TIMESTAMPDIFF(SECOND, e.dataHora, s.dataHora ) /3600) + (TIMESTAMPDIFF(SECOND, ea.dataHora, sa.dataHora ) /3600), 2) AS horas_trabalhadas
 FROM colaborador c, entrada e, entrada_almoco ea, saida_almoco sa, saida s 
 where c.id =1 AND (EXTRACT(DAY FROM sa.dataHora))=EXTRACT(DAY FROM e.dataHora) 
 AND EXTRACT(DAY FROM ea.dataHora)=EXTRACT(DAY FROM s.dataHora) AND 
@@ -189,7 +189,7 @@ AND EXTRACT(DAY FROM ea.dataHora)=EXTRACT(DAY FROM s.dataHora) AND
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Saida}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="" isBlankWhenNull="true">
 				<reportElement x="426" y="0" width="126" height="15" uuid="2f46cc0b-68e5-4bc2-9bd9-8fc08c3faa1d"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="9"/>
@@ -200,7 +200,7 @@ AND EXTRACT(DAY FROM ea.dataHora)=EXTRACT(DAY FROM s.dataHora) AND
 	</detail>
 	<columnFooter>
 		<band height="17">
-			<textField>
+			<textField pattern="" isBlankWhenNull="true">
 				<reportElement x="480" y="0" width="70" height="15" uuid="7530f3b5-c6f9-42a4-80d6-532916a243b3"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="10"/>
