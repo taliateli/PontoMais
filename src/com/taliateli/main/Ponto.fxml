@@ -103,6 +103,7 @@
                   </items>
                 </ComboBox>
                         <Label fx:id="lblRelogio" layoutX="573.0" layoutY="333.0" prefHeight="35.0" prefWidth="160.0" />
+                        <Label fx:id="lblRelogio" layoutX="249.0" layoutY="333.0" prefHeight="33.0" prefWidth="282.0" />
               </children>
             </AnchorPane>
           </content>

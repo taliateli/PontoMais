@@ -23,6 +23,8 @@ import com.taliateli.util.GeradorDeRelatorios;
 import com.taliateli.util.MensagensDialog;
 import com.taliateli.util.Util;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,12 +43,20 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.util.Duration;
 import javafx.util.Pair;
 import net.sf.jasperreports.engine.JRException;
 
 public class PontoControl implements Initializable {
 
+	@FXML
+	private Label lblRelogio;
+	private SimpleDateFormat formatador = new SimpleDateFormat("hh:mm:ss a");
 	@FXML
 	private ComboBox<Colaborador> cbColaboradores;
 	@FXML
@@ -73,6 +83,18 @@ public class PontoControl implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
+			// criamos a fonte usando o método de fábrica.
+			Font font = Font.font("Arial", FontWeight.EXTRA_BOLD, 40);
+			lblRelogio.setFont(font);
+
+			lblRelogio.setEffect(new DropShadow(10, Color.LIMEGREEN));
+
+			// agora ligamos um loop infinito que roda a cada segundo e atualiza
+			// nosso label chamando atualizaHoras.
+			KeyFrame frame = new KeyFrame(Duration.millis(1000), e -> atualizarHoras());
+			Timeline timeline = new Timeline(frame);
+			timeline.setCycleCount(Timeline.INDEFINITE);
+			timeline.play();
 			logs = new ArrayList<String>();
 			cd = new ColaboradorDao();
 			preencherTbView();
@@ -83,6 +105,11 @@ public class PontoControl implements Initializable {
 			MensagensDialog.getAlertError(e.getMessage());
 		}
 
+	}
+
+	private void atualizarHoras() {
+		Date agora = new Date();
+		lblRelogio.setText(formatador.format(agora));
 	}
 
 	private void preencherTbView() throws Exception {
